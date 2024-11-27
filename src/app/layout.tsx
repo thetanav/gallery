@@ -6,7 +6,6 @@ const inter = Inter({ subsets: ["latin"] });
 import { type Metadata } from "next";
 import Navbar from "./_components/Navbar";
 import { ThemeProvider } from "./_components/theme-provider";
-import Command from "./_components/Command";
 import Footer from "./_components/Footer";
 
 export const metadata: Metadata = {
@@ -29,7 +28,6 @@ export default function RootLayout({
           attribute="class"
           defaultTheme="system"
           enableSystem
-          disableTransitionOnChange
         >
           <Navbar />
           {children}

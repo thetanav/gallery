@@ -2,7 +2,6 @@ import Link from "next/link";
 import { Button } from "~/components/ui/button";
 import { UserNav } from "./user-nav";
 import { auth, signIn } from "~/server/auth";
-import { ModeToggle } from "./theme-toggle";
 
 export default async function Navbar() {
   const session = await auth();
@@ -28,7 +27,6 @@ export default async function Navbar() {
               <Button type="submit">Sign in</Button>
             </form>
           )}
-          <ModeToggle />
         </div>
       </div>
     </nav>

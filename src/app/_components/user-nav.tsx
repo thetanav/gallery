@@ -10,7 +10,7 @@ import {
   DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from "~/components/ui/dropdown-menu";
-import { auth } from "~/server/auth";
+import { auth, signOut } from "~/server/auth";
 
 export async function UserNav() {
   const session = await auth();
@@ -37,22 +37,25 @@ export async function UserNav() {
         <DropdownMenuGroup>
           <DropdownMenuItem>
             Profile
-            <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
           </DropdownMenuItem>
           <DropdownMenuItem>
             Billing
-            <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
           </DropdownMenuItem>
           <DropdownMenuItem>
             Settings
-            <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
           </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
-        <DropdownMenuItem>
+        <form action={async () => {
+          "use server";
+          await signOut();
+        }}>
+        <button type="submit" className="w-full">
+        <DropdownMenuItem className="cursor-pointer">
           Log out
-          <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
         </DropdownMenuItem>
+        </button>
+        </form>
       </DropdownMenuContent>
     </DropdownMenu>
   );
