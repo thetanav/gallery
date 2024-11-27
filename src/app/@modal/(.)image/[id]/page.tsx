@@ -8,15 +8,13 @@ import { auth } from "~/server/auth";
 import { db } from "~/server/db";
 import { images } from "~/server/db/schema";
 
-export default async function Page({
-  params
-}: {
+export default async function Page(props: {
   params: Promise<{ id: number }>
 }) {
   const session = await auth();
-  const imageId = (await params).id;
+  const params = await props.params;
   const image = await db.query.images.findFirst({
-    where: (model, { eq }) => eq(model.id, imageId),
+    where: (model, { eq }) => eq(model.id, params.id),
   });
   if (!image) return null;
   const user = await db.query.users.findFirst({
@@ -27,7 +25,7 @@ export default async function Page({
   return (
     <Modal>
       <Image
-        src={image?.url!}
+        src={image.url}
         width={500}
         height={500}
         alt="a user photo"
@@ -37,7 +35,7 @@ export default async function Page({
       <div className="mt-2 flex justify-between">
         <div>
           <h3 className="mb-2 max-w-96 truncate text-lg font-bold">
-            {image?.name}
+            {image.name}
           </h3>
           <div className="flex items-center">
             <img
@@ -61,10 +59,10 @@ export default async function Page({
           }}>
           <Button variant={"destructive"} size={"sm"}>
             <HeartIcon />
-            {image?.clap}
+            {image.clap}
           </Button>
           </form>
-          {session?.user.id == image?.userId && (
+          {session?.user.id == image.userId && (
             <form
               action={async () => {
                 "use server";

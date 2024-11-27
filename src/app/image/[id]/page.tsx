@@ -7,11 +7,12 @@ import { auth } from "~/server/auth";
 import { db } from "~/server/db";
 import { images } from "~/server/db/schema";
 
-export default async function Page({
-  params
-}: {
-  params: { id: string }
-}) {
+export default async function Page(
+  props: {
+    params: Promise<{ id: string }>
+  }
+) {
+  const params = await props.params;
   const session = await auth();
   const imageId = parseInt(params.id, 10);
   const image = await db.query.images.findFirst({
