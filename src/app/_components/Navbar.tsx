@@ -12,7 +12,7 @@ export default async function Navbar() {
       <div className="flex h-14 items-center">
         <div className="flex">
           <Link href="/" className="mr-8 flex items-center space-x-2">
-            <span className="text-xl font-black">FYNC</span>
+            <span className="text-xl font-black">FYNC.gallery</span>
           </Link>
           <nav className="flex items-center space-x-6 text-sm font-medium text-foreground/70">
             <Link href="/docs">Docs</Link>

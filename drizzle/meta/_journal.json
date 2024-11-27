@@ -8,6 +8,13 @@
       "when": 1732626394923,
       "tag": "0000_bitter_thena",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1732700481714,
+      "tag": "0001_green_proteus",
+      "breakpoints": true
     }
   ]
 }

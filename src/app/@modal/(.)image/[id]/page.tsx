@@ -1,23 +1,54 @@
 import Image from "next/image";
 import Modal from "~/app/_components/Modal";
 import { Button } from "~/components/ui/button";
+import { auth } from "~/server/auth";
+import { db } from "~/server/db";
 
-export default function Page({
+export default async function Page({
   params: { id: imageId },
 }: {
-  params: { id: string };
+  params: { id: number };
 }) {
+  const session = await auth();
+  const image = await db.query.images.findFirst({
+    where: (model, { eq }) => eq(model.id, imageId),
+  });
+  const user = await db.query.users.findFirst({
+    where: (model, { eq }) =>
+      image?.userId ? eq(model.id, image.userId) : undefined,
+  });
+
   return (
     <Modal>
-      <Image src="/thumb.jpeg" width={500} height={500} alt="a user photo" className="mr-1 rounded min-w-96 select-none" draggable="false" />
+      <Image
+        src={image?.url!}
+        width={500}
+        height={500}
+        alt="a user photo"
+        className="mt-4 min-w-96 select-none rounded border"
+        draggable="false"
+      />
       <div className="mt-2 flex justify-between">
         <div>
-        <h3 className="text-lg font-bold">Image.jpg</h3>
-        <p className="text-sm text-primary/70">Author: tanav</p>
-        <p className="text-sm text-primary/70">Uploaded: 27 nov 2025</p>
+          <h3 className="text-lg font-bold truncate max-w-96">{image?.name}</h3>
+          <div className="flex items-center">
+            <img
+              src={user?.image!}
+              className="mr-1 h-5 w-5 rounded-full"
+              alt=""
+            />
+            <p className="text-sm text-primary/70">{user?.name}</p>
+          </div>
+          <p className="text-sm text-primary/70">
+            Uploaded: {image?.createdAt.toLocaleDateString()}
+          </p>
         </div>
         <div>
-          <Button variant={"destructive"} size={"sm"}>delete</Button>
+          {session?.user.id == image?.userId && (
+            <Button variant={"destructive"} size={"sm"}>
+              delete
+            </Button>
+          )}
         </div>
       </div>
     </Modal>
