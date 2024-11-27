@@ -51,10 +51,18 @@ export default async function Page({
           </p>
         </div>
         <div className="flex flex-col items-center justify-center gap-1">
+          <form action={async () => {
+            "use server";
+            await db
+              .update(images)
+              .set({ clap: image?.clap! + 1 })
+              .where(eq(images.id, image?.id!));
+          }}>
           <Button variant={"destructive"} size={"sm"}>
             <HeartIcon />
             {image?.clap}
           </Button>
+          </form>
           {session?.user.id == image?.userId && (
             <form
               action={async () => {
