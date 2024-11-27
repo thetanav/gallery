@@ -1,25 +1,89 @@
+import { and, eq } from "drizzle-orm";
+import { HeartIcon } from "lucide-react";
 import Image from "next/image";
-import Modal from "~/app/_components/Modal";
+import { redirect } from "next/navigation";
 import { Button } from "~/components/ui/button";
+import { auth } from "~/server/auth";
+import { db } from "~/server/db";
+import { images } from "~/server/db/schema";
 
-export default function Page({
-  params: { id: imageId },
+export default async function Page({
+  params
 }: {
-  params: { id: string };
+  params: { id: string }
 }) {
+  const session = await auth();
+  const imageId = parseInt(params.id, 10);
+  const image = await db.query.images.findFirst({
+    where: (model, { eq }) => imageId ? eq(model.id, imageId) : undefined,
+  });
+  const user = await db.query.users.findFirst({
+    where: (model, { eq }) =>
+      image?.userId ? eq(model.id, image.userId) : undefined,
+  });
+
   return (
-    <Modal>
-      <Image src="/thumb.jpeg" width={500} height={500} alt="a user photo" className="mr-1 rounded min-w-96 select-none" draggable="false" />
+    <div className="max-w-screen-lg mx-auto">
+      <Image
+        src={image?.url!}
+        width={500}
+        height={500}
+        alt="a user photo"
+        className="mt-4 min-w-96 select-none border"
+        draggable="false"
+      />
       <div className="mt-2 flex justify-between">
         <div>
-        <h3 className="text-lg font-bold">Image.jpg</h3>
-        <p className="text-sm text-primary/70">Author: tanav</p>
-        <p className="text-sm text-primary/70">Uploaded: 27 nov 2025</p>
+          <h3 className="mb-2 max-w-96 truncate text-lg font-bold">
+            {image?.name}
+          </h3>
+          <div className="flex items-center">
+            <img
+              src={user?.image!}
+              className="mr-1 h-5 w-5 rounded-full"
+              alt=""
+            />
+            <p className="text-sm text-primary/70">{user?.name}</p>
+          </div>
+          <p className="text-sm text-primary/70">
+            Uploaded: {image?.createdAt.toLocaleDateString()}
+          </p>
         </div>
-        <div>
-          <Button variant={"destructive"} size={"sm"}>delete</Button>
+        <div className="flex flex-col items-center justify-center gap-1">
+          <form action={async () => {
+            "use server";
+            await db
+              .update(images)
+              .set({ clap: image?.clap! + 1 })
+              .where(eq(images.id, image?.id!));
+          }}>
+          <Button variant={"destructive"} size={"sm"}>
+            <HeartIcon />
+            {image?.clap}
+          </Button>
+          </form>
+          {session?.user.id == image?.userId && (
+            <form
+              action={async () => {
+                "use server";
+                await db
+                  .delete(images)
+                  .where(
+                    and(
+                      eq(images.id, image?.id!),
+                      eq(images.userId, session?.user.id!),
+                    ),
+                  );
+                redirect("/");
+              }}
+            >
+              <Button variant={"secondary"} size={"sm"}>
+                delete
+              </Button>
+            </form>
+          )}
         </div>
       </div>
-    </Modal>
+    </div>
   );
 }

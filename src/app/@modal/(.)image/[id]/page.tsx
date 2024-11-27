@@ -1,6 +1,5 @@
 import { and, eq } from "drizzle-orm";
 import { HeartIcon } from "lucide-react";
-import { revalidatePath } from "next/cache";
 import Image from "next/image";
 import { redirect } from "next/navigation";
 import Modal from "~/app/_components/Modal";
@@ -10,14 +9,16 @@ import { db } from "~/server/db";
 import { images } from "~/server/db/schema";
 
 export default async function Page({
-  params: { id: imageId },
+  params
 }: {
-  params: { id: number };
+  params: Promise<{ id: number }>
 }) {
   const session = await auth();
+  const imageId = (await params).id;
   const image = await db.query.images.findFirst({
     where: (model, { eq }) => eq(model.id, imageId),
   });
+  if (!image) return null;
   const user = await db.query.users.findFirst({
     where: (model, { eq }) =>
       image?.userId ? eq(model.id, image.userId) : undefined,
