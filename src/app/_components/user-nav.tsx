@@ -16,11 +16,11 @@ export async function UserNav() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" className="relative h-8 w-8 rounded-full">
+        <Button variant="ghost" size={"icon"} className={"relative rounded-full" + (session?.user.email == "tanavposwal939@gmail.com" && " ring ring-yellow-600")}>
           <img
             src={session?.user.image!}
             alt="avatar"
-            className="absolute h-8 w-8 rounded-full"
+            className="absolute w-full rounded-full"
           />
           <span className="sr-only">Open user menu</span>
         </Button>

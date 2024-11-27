@@ -8,7 +8,7 @@ export default async function Navbar() {
   const session = await auth();
 
   return (
-    <nav className="sticky top-0 z-50 w-full border-b bg-background/95 px-8 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <nav className="sticky top-0 z-50 w-full border-b bg-background/95 px-8 backdrop-blur-lg supports-[backdrop-filter]:bg-background/70">
       <div className="flex h-14 items-center">
         <div className="flex">
           <Link href="/" className="mr-8 flex items-center space-x-2">

@@ -11,7 +11,7 @@ export default function CreatorCard() {
   return (
     <HoverCard>
       <HoverCardTrigger asChild>
-        <Button variant="link">@tanavindev</Button>
+        <Button variant="link" className="opacity-70 hover:opacity-100">developer @tanavindev</Button>
       </HoverCardTrigger>
       <HoverCardContent className="w-80">
         <div className="flex justify-between space-x-4">
