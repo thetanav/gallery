@@ -14,11 +14,6 @@ export default async function Navbar() {
           <Link href="/" className="mr-8 flex items-center space-x-2">
             <span className="text-xl font-black">FYNC.gallery</span>
           </Link>
-          <nav className="flex items-center space-x-6 text-sm font-medium text-foreground/70">
-            <Link href="/docs">Docs</Link>
-            <Link href="/components">Components</Link>
-            <Link href="/examples">Examples</Link>
-          </nav>
         </div>
         <div className="flex flex-1 items-center justify-end gap-3">
           {session ? (

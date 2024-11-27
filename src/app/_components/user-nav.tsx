@@ -1,3 +1,4 @@
+import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
 import { Button } from "~/components/ui/button";
 import {
   DropdownMenu,
@@ -17,12 +18,10 @@ export async function UserNav() {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" size={"icon"} className="relative rounded-full">
-          <img
-            src={session?.user.image!}
-            alt="avatar"
-            className="absolute w-full rounded-full"
-          />
-          <span className="sr-only">Open user menu</span>
+          <Avatar className="w-8 h-8">
+            <AvatarImage src={session?.user.image!} />
+            <AvatarFallback>{session?.user.name?.[0]}</AvatarFallback>
+          </Avatar>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56" align="center" forceMount>

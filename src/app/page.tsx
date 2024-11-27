@@ -11,12 +11,13 @@ export default async function HomePage() {
 
   return (
     <main>
-      <div className="p-5">
+      <div className="p-5 flex flex-col items-center justify-center gap-1">
+        <p className="text-xl font-bold mb-1">Upload your images</p>
         <Uploader />
       </div>
       <div className="flex flex-wrap justify-center gap-2 p-3 md:px-16 md:py-3">
       {images.map((image) => (
-        <Link href={"/image/"+image.id} className="select-none w-fit" draggable="false" key={image.id}>
+        <Link href={"/image/"+image.id} className="select-none w-fit flex flex-col items-center justify-center" draggable="false" key={image.id}>
           <Image
             src={image.url}
             width={288}

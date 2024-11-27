@@ -1,8 +1,13 @@
+import { and, eq } from "drizzle-orm";
+import { HeartIcon } from "lucide-react";
+import { revalidatePath } from "next/cache";
 import Image from "next/image";
+import { redirect } from "next/navigation";
 import Modal from "~/app/_components/Modal";
 import { Button } from "~/components/ui/button";
 import { auth } from "~/server/auth";
 import { db } from "~/server/db";
+import { images } from "~/server/db/schema";
 
 export default async function Page({
   params: { id: imageId },
@@ -30,7 +35,9 @@ export default async function Page({
       />
       <div className="mt-2 flex justify-between">
         <div>
-          <h3 className="text-lg font-bold truncate max-w-96">{image?.name}</h3>
+          <h3 className="mb-2 max-w-96 truncate text-lg font-bold">
+            {image?.name}
+          </h3>
           <div className="flex items-center">
             <img
               src={user?.image!}
@@ -43,11 +50,30 @@ export default async function Page({
             Uploaded: {image?.createdAt.toLocaleDateString()}
           </p>
         </div>
-        <div>
+        <div className="flex flex-col items-center justify-center gap-1">
+          <Button variant={"destructive"} size={"sm"}>
+            <HeartIcon />
+            {image?.clap}
+          </Button>
           {session?.user.id == image?.userId && (
-            <Button variant={"destructive"} size={"sm"}>
-              delete
-            </Button>
+            <form
+              action={async () => {
+                "use server";
+                await db
+                  .delete(images)
+                  .where(
+                    and(
+                      eq(images.id, image?.id!),
+                      eq(images.userId, session?.user.id!),
+                    ),
+                  );
+                redirect("/");
+              }}
+            >
+              <Button variant={"secondary"} size={"sm"}>
+                delete
+              </Button>
+            </form>
           )}
         </div>
       </div>
