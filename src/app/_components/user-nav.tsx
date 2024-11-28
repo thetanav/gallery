@@ -17,7 +17,7 @@ export async function UserNav() {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" size={"icon"} className="relative rounded-full">
-          <Avatar className="w-8 h-8">
+          <Avatar className="w-full h-full">
             <AvatarImage src={session?.user.image!} />
             <AvatarFallback>{session?.user.name?.[0]}</AvatarFallback>
           </Avatar>

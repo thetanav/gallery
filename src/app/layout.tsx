@@ -7,6 +7,7 @@ import { type Metadata } from "next";
 import Navbar from "./_components/Navbar";
 import { ThemeProvider } from "./_components/theme-provider";
 import Footer from "./_components/Footer";
+import { Toaster } from "sonner";
 
 export const metadata: Metadata = {
   title: "FYNC - gallery",
@@ -32,6 +33,7 @@ export default function RootLayout({
           <Navbar />
           {children}
           {modal}
+          <Toaster />
           <Footer />
         </ThemeProvider>
       </body>

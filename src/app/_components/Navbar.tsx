@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Button } from "~/components/ui/button";
 import { UserNav } from "./user-nav";
 import { auth, signIn } from "~/server/auth";
+import { Uploader } from "./Uploader";
 
 export default async function Navbar() {
   const session = await auth();
@@ -16,7 +17,10 @@ export default async function Navbar() {
         </div>
         <div className="flex flex-1 items-center justify-end gap-3">
           {session ? (
-            <UserNav />
+            <div className="w-fit h-fit flex items-center justify-center gap-2">
+              <Uploader />
+              <UserNav />
+            </div>
           ) : (
             <form
               action={async () => {
