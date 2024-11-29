@@ -3,6 +3,7 @@ import { HeartIcon } from "lucide-react";
 import Image from "next/image";
 import { redirect } from "next/navigation";
 import Modal from "~/app/_components/Modal";
+import ResImage from "~/app/_components/ResImage";
 import { Button } from "~/components/ui/button";
 import { auth } from "~/server/auth";
 import { db } from "~/server/db";
@@ -22,15 +23,8 @@ export default async function Page(props: { params: Promise<{ id: number }> }) {
 
   return (
     <Modal>
-      <div className="w-full h-full flex items-center justify-center">
-      <Image
-        src={image.url}
-        width={400}
-        height={400}
-        alt="a user photo"
-        className="mt-4 max-h-[60vh] w-fit aspect-auto select-none"
-        draggable="false"
-      />
+      <div className="flex mt-4 aspect-auto max-h-[60vh] w-full select-none border justify-center">
+        <ResImage src={image.url} />
       </div>
       <div className="mt-2 flex w-full justify-between">
         <div>

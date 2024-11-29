@@ -43,7 +43,7 @@ export default async function HomePage(props: { searchParams: any }) {
         {imagesArr.map((image) => (
           <Link
             href={"/image/" + image.id}
-            className="flex w-fit select-none flex-col items-center justify-center"
+            className="flex w-fit select-none flex-col items-center justify-center group"
             draggable="false"
             key={image.id}
           >
@@ -51,12 +51,12 @@ export default async function HomePage(props: { searchParams: any }) {
               src={image.url}
               width={260}
               height={260}
-              quality={40}
+              quality={10}
               alt="a user photo"
-              className="block h-fit max-h-52 w-fit max-w-52 select-none rounded brightness-100 transition-transform hover:brightness-90"
+              className="block h-fit w-96 sm:max-h-52 sm:w-fit sm:max-w-52 border select-none rounded brightness-100 transition-all group-hover:brightness-95"
               draggable="false"
             />
-            <div className="mt-1 flex w-52 font-semibold">
+            <div className="mt-1 flex w-96 sm:w-52 font-semibold">
               <p className="text-md mr-2 w-full truncate text-primary">
                 {image.name}
               </p>

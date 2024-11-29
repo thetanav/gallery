@@ -20,7 +20,7 @@ export default function Modal({ children }: { children: React.ReactNode }) {
 
   return (
     <dialog
-      className="border bg-background pt-6 px-3 pb-3 shadow rounded-lg max-w-[80vw]"
+      className="border bg-background pt-6 px-3 pb-3 shadow rounded-lg w-[90vw] sm: max-w-[80vh]"
       ref={dialogRef}
       onClose={onDismiss}
     >

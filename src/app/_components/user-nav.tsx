@@ -7,6 +7,7 @@ import {
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
+  DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from "~/components/ui/dropdown-menu";
 import { auth, signOut } from "~/server/auth";
@@ -17,7 +18,7 @@ export async function UserNav() {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" size={"icon"} className="relative rounded-full">
-          <Avatar className="w-full h-full">
+          <Avatar className="h-full w-full">
             <AvatarImage src={session?.user.image!} />
             <AvatarFallback>{session?.user.name?.[0]}</AvatarFallback>
           </Avatar>
@@ -26,7 +27,9 @@ export async function UserNav() {
       <DropdownMenuContent className="w-56" align="center" forceMount>
         <DropdownMenuLabel className="font-normal">
           <div className="flex flex-col space-y-1">
-            <p className="text-sm font-medium leading-none">{session?.user.name}</p>
+            <p className="text-sm font-medium leading-none">
+              {session?.user.name}
+            </p>
             <p className="text-xs leading-none text-muted-foreground">
               {session?.user.email}
             </p>
@@ -36,24 +39,29 @@ export async function UserNav() {
         <DropdownMenuGroup>
           <DropdownMenuItem>
             Profile
+            <DropdownMenuShortcut>soon</DropdownMenuShortcut>
           </DropdownMenuItem>
           <DropdownMenuItem>
-            Billing
+            My images
+            <DropdownMenuShortcut>soon</DropdownMenuShortcut>
           </DropdownMenuItem>
           <DropdownMenuItem>
             Settings
+            <DropdownMenuShortcut>soon</DropdownMenuShortcut>
           </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
-        <form action={async () => {
-          "use server";
-          await signOut();
-        }}>
-        <button type="submit" className="w-full">
-        <DropdownMenuItem className="cursor-pointer">
-          Log out
-        </DropdownMenuItem>
-        </button>
+        <form
+          action={async () => {
+            "use server";
+            await signOut();
+          }}
+        >
+          <button type="submit" className="w-full">
+            <DropdownMenuItem className="cursor-pointer">
+              Log out
+            </DropdownMenuItem>
+          </button>
         </form>
       </DropdownMenuContent>
     </DropdownMenu>
