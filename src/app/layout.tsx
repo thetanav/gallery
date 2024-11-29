@@ -31,7 +31,7 @@ export default function RootLayout({
           defaultTheme="system"
           enableSystem
         >
-          <NextTopLoader showSpinner={true} />
+          <NextTopLoader showSpinner={false} />
           <Navbar />
           {children}
           {modal}

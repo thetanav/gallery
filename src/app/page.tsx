@@ -26,7 +26,7 @@ export default async function HomePage(props: { searchParams: any }) {
   return (
     <main>
       <div className="flex flex-wrap justify-center gap-4 p-3 py-4 md:px-16">
-        <div className="mb-4 flex w-full justify-center px-8 md:px-0">
+        <div className="mb-4 mt-2 flex w-full justify-center px-8 md:px-0">
           <form
             className="flex w-full max-w-lg items-center space-x-2"
             method="get"
@@ -36,6 +36,7 @@ export default async function HomePage(props: { searchParams: any }) {
               name="s"
               placeholder="keyword..."
               defaultValue={keyword}
+              autoComplete="off"
             />
             <Button type="submit">Search</Button>
           </form>

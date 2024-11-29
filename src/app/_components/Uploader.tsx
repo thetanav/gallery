@@ -98,9 +98,10 @@ export function Uploader() {
   });
 
   return (
-    <Button variant={"outline"} size={"icon"}>
-      <label htmlFor="upload-button" className="cursor-pointer">
+    <Button variant={"outline"}>
+      <label htmlFor="upload-button" className="cursor-pointer flex gap-2">
         <UploadSVG />
+        Upload
       </label>
       <input
         id="upload-button"

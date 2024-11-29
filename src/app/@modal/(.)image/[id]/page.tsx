@@ -1,7 +1,5 @@
 import { and, eq } from "drizzle-orm";
 import { HeartIcon } from "lucide-react";
-import Image from "next/image";
-import Link from "next/link";
 import { redirect } from "next/navigation";
 import Modal from "~/app/_components/Modal";
 import ResImage from "~/app/_components/ResImage";
@@ -29,9 +27,9 @@ export default async function Page(props: { params: Promise<{ id: number }> }) {
       </div>
       <div className="mt-2 flex w-full justify-between">
         <div>
-          <Link className="mb-2 truncate max-w-72 text-lg font-bold" href={'/image/' + image.id}>
+          <h2 className="mb-2 truncate max-w-72 text-lg font-bold">
             {image.name}
-          </Link>
+          </h2>
           <div className="mb-2 flex items-center">
             <img
               src={user?.image!}

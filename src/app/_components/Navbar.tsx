@@ -8,7 +8,7 @@ import {
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "~/components/ui/tooltip"
+} from "~/components/ui/tooltip";
 
 export default async function Navbar() {
   const session = await auth();
@@ -24,16 +24,7 @@ export default async function Navbar() {
         <div className="flex flex-1 items-center justify-end gap-3">
           {session ? (
             <div className="flex h-fit w-fit items-center justify-center gap-3">
-              <TooltipProvider>
-                <Tooltip open>
-                  <TooltipTrigger asChild>
-                    <Uploader />
-                  </TooltipTrigger>
-                  <TooltipContent side="left" sideOffset={5}>
-                    <p>Upload an image</p>
-                  </TooltipContent>
-                </Tooltip>
-              </TooltipProvider>
+              <Uploader />
               <UserNav />
             </div>
           ) : (
