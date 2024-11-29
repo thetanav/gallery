@@ -7,7 +7,7 @@ export default function ResImage({ src }: { src: string }) {
   const [isHighResLoaded, setHighResLoaded] = useState(false);
 
   return (
-    <div className="relative overflow-hidden w-full h-[70vh] md:w-96 md:h-96 rounded">
+    <div className="relative overflow-hidden w-full h-[70vh] rounded">
       <Image
         src={src}
         alt="A user photo"
