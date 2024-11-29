@@ -23,12 +23,12 @@ export default async function Page(props: { params: Promise<{ id: number }> }) {
 
   return (
     <Modal>
-      <div className="flex mt-4 aspect-auto max-h-[60vh] w-full select-none border justify-center">
+      <div className="flex mt-4 select-none justify-center items-center">
         <ResImage src={image.url} />
       </div>
       <div className="mt-2 flex w-full justify-between">
         <div>
-          <h3 className="mb-2 w-[60vw] truncate text-lg font-bold">
+          <h3 className="mb-2 truncate max-w-72 text-lg font-bold">
             {image.name}
           </h3>
           <div className="mb-2 flex items-center">

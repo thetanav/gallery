@@ -1,33 +1,33 @@
 "use client";
 
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import Image from "next/image";
 
 export default function ResImage({ src }: { src: string }) {
   const [isHighResLoaded, setHighResLoaded] = useState(false);
 
   return (
-    <div className="relative w-fit h-fit overflow-auto border flex items-center justify-center">
+    <div className="relative overflow-hidden w-full h-[70vh] md:w-96 md:h-96 rounded">
       <Image
         src={src}
-        alt={"a user photo"}
-        width={300}
-        height={300}
-        quality={1}
+        alt="A user photo"
+        layout="fill"
+        objectFit="contain"
         draggable="false"
-        className={`absolute w-full h-full inset-0 select-none transition-opacity duration-500 ${
-          isHighResLoaded ? "opacity-0 hidden" : "opacity-100"
+        loading="eager"
+        className={`transition-opacity duration-200 ${
+          isHighResLoaded ? "opacity-0 hidden" : "opacity-100 blur-sm"
         }`}
       />
       <Image
         src={src}
-        alt={"a user photo"}
-        width={500}
-        height={500}
-        quality={90}
+        alt="A user photo"
+        layout="fill"
+        objectFit="contain"
         draggable="false"
+        loading="lazy"
         onLoadingComplete={() => setHighResLoaded(true)}
-        className={`absolute w-full h-full inset-0 select-none transition-opacity duration-500 ${
+        className={`transition-opacity duration-200 ${
           isHighResLoaded ? "opacity-100" : "opacity-0"
         }`}
       />
