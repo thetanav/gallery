@@ -98,17 +98,22 @@ export function Uploader() {
   });
 
   return (
-    <Button variant={"outline"}>
-      <label htmlFor="upload-button" className="cursor-pointer flex gap-2">
-        <UploadSVG />
-        Upload
-      </label>
+    <>
+      <Button variant={"outline"} asChild>
+        <label
+          htmlFor="upload-button"
+          className="flex h-full w-full items-center justify-center gap-2 cursor-pointer"
+        >
+          <UploadSVG />
+          <p>Upload</p>
+        </label>
+      </Button>
       <input
         id="upload-button"
         type="file"
         className="sr-only"
         {...inputProps}
       />
-    </Button>
+    </>
   );
 }

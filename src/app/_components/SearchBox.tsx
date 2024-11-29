@@ -19,10 +19,10 @@ export default function SearchBox() {
   })
 
   return (
-    <div className="w-full px-24 py-3 flex items-center justify-center">
+    <div className="w-full px-16 sm:px-24 py-3 flex items-center justify-center">
       <input
         type="text"
-        className="w-9/12 px-4 py-3 border rounded-xl shadow-lg outline-none hover:border-secondary-foreground transition-colors"
+        className="w-full px-4 py-3 border rounded-xl shadow-lg outline-none hover:border-secondary-foreground transition-colors"
         placeholder="Search from titles"
         onChange={(e) => handleChange(e.target.value)}
         defaultValue={searchParams.get('query')?.toString()}
