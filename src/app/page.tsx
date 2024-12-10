@@ -27,9 +27,10 @@ export default async function HomePage(props: { searchParams: any }) {
   return (
     <main>
       <div className="flex flex-wrap justify-center gap-4 p-3 py-4 md:px-16">
-        <div className="mb-4 mt-2 flex w-full justify-center px-8 md:px-0">
+        <div className="mb-4 mt-4 flex w-full justify-center px-8 md:px-0">
           <SearchBox />
         </div>
+        <div className="flex flex-wrap justify-center gap-4">
         {imagesArr.map((image) => (
           <Link
             href={"/image/" + image.id}
@@ -37,26 +38,26 @@ export default async function HomePage(props: { searchParams: any }) {
             draggable="false"
             key={image.id}
           >
-            <Image
+            <img
               src={image.url}
               width={260}
               height={260}
-              quality={10}
               alt="a user photo"
-              className="block h-fit w-96 sm:max-h-52 sm:w-fit sm:max-w-52 border select-none rounded brightness-100 transition-all group-hover:brightness-95"
+              className="block h-fit w-96 sm:max-h-52 md:max-h-72 sm:w-fit sm:max-w-52 md:max-w-72 border select-none rounded brightness-100 transition-all group-hover:brightness-95"
               draggable="false"
             />
             <div className="mt-1 flex w-96 sm:w-52 font-semibold">
               <p className="text-md mr-2 w-full truncate text-primary">
                 {image.name}
               </p>
-              <div className="flex items-center justify-center gap-1 text-pink-600">
-                <HeartIcon className="h-5 w-5" />
+              <div className="flex items-center justify-center gap-1 text-rose-600">
+                <HeartIcon className="h-5 w-5 stroke-[3px]" />
                 {image.clap}
               </div>
             </div>
           </Link>
         ))}
+        </div>
       </div>
     </main>
   );

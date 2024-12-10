@@ -19,7 +19,7 @@ export default function SearchBox() {
   })
 
   return (
-    <div className="w-full px-16 sm:px-24 py-3 flex items-center justify-center">
+    <div className="w-full flex items-center justify-center">
       <input
         type="text"
         className="w-full px-4 py-3 border rounded-xl shadow-lg outline-none hover:border-secondary-foreground transition-colors"

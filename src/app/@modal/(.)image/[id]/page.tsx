@@ -1,8 +1,8 @@
 import { and, eq } from "drizzle-orm";
 import { HeartIcon } from "lucide-react";
 import { redirect } from "next/navigation";
+import LikeButton from "~/app/_components/LikeButton";
 import Modal from "~/app/_components/Modal";
-import ResImage from "~/app/_components/ResImage";
 import { Button } from "~/components/ui/button";
 import { auth } from "~/server/auth";
 import { db } from "~/server/db";
@@ -22,12 +22,17 @@ export default async function Page(props: { params: Promise<{ id: number }> }) {
 
   return (
     <Modal>
-      <div className="flex mt-4 select-none justify-center items-center">
-        <ResImage src={image.url} />
+      <div className="mt-2 flex h-[70vh] w-full items-center justify-center overflow-hidden">
+        <img
+          src={image.url}
+          alt="A user photo"
+          draggable="false"
+          loading="eager"
+        />
       </div>
       <div className="mt-2 flex w-full justify-between">
         <div>
-          <h2 className="mb-2 truncate max-w-72 text-lg font-bold">
+          <h2 className="mb-2 max-w-72 truncate text-lg font-bold">
             {image.name}
           </h2>
           <div className="mb-2 flex items-center">
@@ -53,10 +58,7 @@ export default async function Page(props: { params: Promise<{ id: number }> }) {
                   .where(eq(images.id, image?.id!));
               }}
             >
-              <Button variant={"destructive"} size={"sm"}>
-                <HeartIcon />
-                {image.clap}
-              </Button>
+              <LikeButton image={image} />
             </form>
           ) : (
             <Button variant={"destructive"} disabled size={"sm"}>
