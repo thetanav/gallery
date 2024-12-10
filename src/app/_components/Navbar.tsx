@@ -18,7 +18,7 @@ export default async function Navbar() {
       <div className="flex h-14 items-center">
         <div className="flex">
           <Link href="/" className="mr-8 flex items-center space-x-2">
-            <span className="text-xl font-black">FYNC.gallery</span>
+            <span className="text-xl font-bold">gallery</span>
           </Link>
         </div>
         <div className="flex flex-1 items-center justify-end gap-3">

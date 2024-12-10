@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
 import { Button } from "~/components/ui/button";
 import {
@@ -41,9 +42,8 @@ export async function UserNav() {
             Profile
             <DropdownMenuShortcut>soon</DropdownMenuShortcut>
           </DropdownMenuItem>
-          <DropdownMenuItem>
-            My images
-            <DropdownMenuShortcut>soon</DropdownMenuShortcut>
+          <DropdownMenuItem asChild>
+            <Link href="/me">My Images</Link>
           </DropdownMenuItem>
           <DropdownMenuItem>
             Settings

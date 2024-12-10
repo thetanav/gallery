@@ -1,9 +1,6 @@
 import Link from "next/link";
-import Image from "next/image";
 import { db } from "~/server/db";
 import { HeartIcon } from "lucide-react";
-import { Input } from "~/components/ui/input";
-import { Button } from "~/components/ui/button";
 import { images } from "~/server/db/schema";
 import { desc, ilike } from "drizzle-orm";
 import SearchBox from "./_components/SearchBox";

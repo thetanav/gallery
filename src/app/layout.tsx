@@ -11,7 +11,7 @@ import { Toaster } from "sonner";
 import NextTopLoader from 'nextjs-toploader';
 
 export const metadata: Metadata = {
-  title: "FYNC - gallery",
+  title: "gallery FYNC",
   description: "app for no user",
   icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
