@@ -1,16 +1,14 @@
-import CreatorCard from "./Creater";
-import { ModeToggle } from "./theme-toggle";
-
 export default function Footer() {
   return (
-    <footer className="flex h-24 items-center gap-6 border-t bg-background/5 px-8 text-sm text-muted-foreground mt-36">
-      <div className="flex justify-between items-center w-full">
-        <div className="flex gap-4 items-center">
-        <h2 className="text-foreground text-lg font-bold">FYNC</h2>
-        <ModeToggle />
+    <footer className="mt-36 flex h-24 flex-col items-center justify-center border-t">
+      <div className="flex w-full max-w-5xl items-center justify-between px-8">
+        <div className="flex items-center gap-4">
+          <h2 className="text-lg font-bold">FYNC</h2>
         </div>
-        <CreatorCard />
       </div>
+      <p className="mt-2 text-center text-sm">
+        © {new Date().getFullYear()} FYNC. All rights reserved.
+      </p>
     </footer>
   );
 }

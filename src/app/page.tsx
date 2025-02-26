@@ -42,9 +42,11 @@ export default async function HomePage(props: { searchParams: any }) {
                 <p className="text-md truncate font-semibold text-black">
                   {image.name}
                 </p>
-                <div className="flex items-center justify-center gap-1 text-rose-600">
-                  <HeartIcon className="h-5 w-5 stroke-[3px]" />
-                  {image.clap}
+                <div className="flex items-center justify-center gap-1">
+                  <HeartIcon className="h-5 w-5 fill-rose-500 stroke-none text-rose-500" />
+                  <span className="text-sm font-medium text-rose-500">
+                    {image?.clap || 0}
+                  </span>
                 </div>
               </div>
             </Link>

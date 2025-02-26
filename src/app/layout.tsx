@@ -5,10 +5,9 @@ import { Inter } from "next/font/google";
 const inter = Inter({ subsets: ["latin"] });
 import { type Metadata } from "next";
 import Navbar from "./_components/Navbar";
-import { ThemeProvider } from "./_components/theme-provider";
 import Footer from "./_components/Footer";
 import { Toaster } from "sonner";
-import NextTopLoader from 'nextjs-toploader';
+import NextTopLoader from "nextjs-toploader";
 
 export const metadata: Metadata = {
   title: "gallery FYNC",
@@ -24,20 +23,14 @@ export default function RootLayout({
   modal: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${inter.className}`}>
+    <html lang="en" className={`${inter.className} dark`}>
       <body className="min-h-screen w-full">
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-        >
-          <NextTopLoader showSpinner={false} />
-          <Navbar />
-          {children}
-          {modal}
-          <Toaster />
-          <Footer />
-        </ThemeProvider>
+        <NextTopLoader showSpinner={false} color="#fff" />
+        <Navbar />
+        {children}
+        {modal}
+        <Toaster />
+        <Footer />
       </body>
     </html>
   );

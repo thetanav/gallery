@@ -2,6 +2,7 @@
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useDebouncedCallback } from "use-debounce";
+import { Input } from "~/components/ui/input";
 
 export default function SearchBox() {
   const searchParams = useSearchParams();
@@ -20,7 +21,7 @@ export default function SearchBox() {
 
   return (
     <div className="flex w-full items-center justify-center">
-      <input
+      <Input
         type="text"
         className="w-full rounded-xl border px-4 py-3 shadow-lg outline-none transition-colors"
         placeholder="Search from..."
