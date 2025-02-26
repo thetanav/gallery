@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
-import { Button } from "~/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -17,13 +16,11 @@ export async function UserNav() {
   const session = await auth();
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button variant="ghost" size={"icon"} className="relative rounded-full">
-          <Avatar>
-            <AvatarImage src={session?.user.image!} />
-            <AvatarFallback>{session?.user.name?.[0]}</AvatarFallback>
-          </Avatar>
-        </Button>
+      <DropdownMenuTrigger className="cursor-pointer" asChild>
+        <Avatar>
+          <AvatarImage src={session?.user.image!} />
+          <AvatarFallback>{session?.user.name?.[0]}</AvatarFallback>
+        </Avatar>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56" align="center" forceMount>
         <DropdownMenuLabel className="font-normal">

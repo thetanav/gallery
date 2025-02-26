@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useDebouncedCallback } from 'use-debounce';
+import { useDebouncedCallback } from "use-debounce";
 
 export default function SearchBox() {
   const searchParams = useSearchParams();
@@ -16,16 +16,16 @@ export default function SearchBox() {
       params.delete("s");
     }
     replace(`${pathname}?${params.toString()}`, { scroll: false });
-  })
+  });
 
   return (
-    <div className="w-full flex items-center justify-center">
+    <div className="flex w-full items-center justify-center">
       <input
         type="text"
-        className="w-full px-4 py-3 border rounded-xl shadow-lg outline-none hover:border-secondary-foreground transition-colors"
-        placeholder="Search from titles"
+        className="w-full rounded-xl border px-4 py-3 shadow-lg outline-none transition-colors"
+        placeholder="Search from..."
         onChange={(e) => handleChange(e.target.value)}
-        defaultValue={searchParams.get('query')?.toString()}
+        defaultValue={searchParams.get("query")?.toString()}
       />
     </div>
   );

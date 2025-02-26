@@ -1,13 +1,12 @@
 import { and, eq } from "drizzle-orm";
-import { HeartIcon } from "lucide-react";
-import Image from "next/image";
+import { HeartIcon, TrashIcon } from "lucide-react";
 import { redirect } from "next/navigation";
-import { Suspense } from "react";
 import { Button } from "~/components/ui/button";
-import { Skeleton } from "~/components/ui/skeleton";
 import { auth } from "~/server/auth";
 import { db } from "~/server/db";
 import { images } from "~/server/db/schema";
+import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
+import BackButton from "~/app/_components/BackButton";
 
 export default async function Page(props: { params: Promise<{ id: string }> }) {
   const params = await props.params;
@@ -22,65 +21,71 @@ export default async function Page(props: { params: Promise<{ id: string }> }) {
   });
 
   return (
-    <div className="mx-auto flex max-w-screen-lg flex-col items-center px-3 py-8">
-      <Image
-        src={image?.url!}
-        width={500}
-        height={500}
-        alt="a user photo"
-        className="mt-4 w-fit select-none border sm:max-w-[80vw] sm:max-h-[60vh]"
-        draggable="false"
-      />
-      <div className="mt-8 flex w-full justify-between sm:max-w-[80vw]">
-        <div>
-          <h3 className="text-md mb-2 w-full font-bold">{image?.name}</h3>
-          <div className="flex items-center">
-            <img
-              src={user?.image!}
-              className="mr-1 h-5 w-5 rounded-full"
-              alt=""
-            />
-            <p className="text-md text-primary/70">{user?.name}</p>
-          </div>
-          <p className="text-sm text-primary/70">
-            Uploaded: {image?.createdAt.toLocaleDateString()}
-          </p>
+    <div>
+      <BackButton />
+      <div className="mx-auto flex max-w-screen-md flex-col px-3">
+        <div className="overflow-hidden rounded-lg shadow-md">
+          <img
+            src={image?.url!}
+            alt={image?.name!}
+            className="w-full object-cover"
+            draggable="false"
+            style={{ aspectRatio: "auto" }}
+          />
         </div>
-        <div className="flex flex-col items-center justify-start gap-1">
-          <form
-            action={async () => {
-              "use server";
-              await db
-                .update(images)
-                .set({ clap: image?.clap! + 1 })
-                .where(eq(images.id, image?.id!));
-            }}
-          >
-            <Button variant={"destructive"} size={"sm"}>
-              <HeartIcon />
-              {image?.clap}
-            </Button>
-          </form>
-          {session?.user.id == image?.userId && (
+
+        <div className="mt-6 flex items-start justify-between">
+          <div className="flex items-center">
+            <Avatar className="mr-3 h-10 w-10">
+              <AvatarImage src={user?.image!} alt={user?.name!} />
+              <AvatarFallback>
+                {user?.name?.slice(0, 2).toUpperCase()}
+              </AvatarFallback>
+            </Avatar>
+            <div>
+              <p className="font-semibold">{user?.name}</p>
+              <p className="text-sm opacity-60">
+                Uploaded: {image?.createdAt.toLocaleDateString()}
+              </p>
+            </div>
+          </div>
+
+          <div className="flex items-center space-x-2">
             <form
               action={async () => {
                 "use server";
                 await db
-                  .delete(images)
-                  .where(
-                    and(
-                      eq(images.id, image?.id!),
-                      eq(images.userId, session?.user.id!),
-                    ),
-                  );
-                redirect("/");
+                  .update(images)
+                  .set({ clap: image?.clap! + 1 })
+                  .where(eq(images.id, image?.id!));
               }}
             >
-              <Button variant={"secondary"} size={"sm"}>
-                delete
+              <Button variant={"ghost"} className="rounded-full">
+                <HeartIcon className="h-5 w-5 fill-rose-500 stroke-none text-rose-500" />
+                <span className="text-sm font-medium">{image?.clap || 0}</span>
               </Button>
             </form>
-          )}
+            {session?.user.id == image?.userId && (
+              <form
+                action={async () => {
+                  "use server";
+                  await db
+                    .delete(images)
+                    .where(
+                      and(
+                        eq(images.id, image?.id!),
+                        eq(images.userId, session?.user.id!),
+                      ),
+                    );
+                  redirect("/");
+                }}
+              >
+                <Button variant={"ghost"} className="rounded-full">
+                  <TrashIcon />
+                </Button>
+              </form>
+            )}
+          </div>
         </div>
       </div>
     </div>

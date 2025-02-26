@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { useUploadThing } from "~/utils/uploadthing";
 import { toast } from "sonner";
 import { Button } from "~/components/ui/button";
+import { PlusIcon } from "lucide-react";
 
 // inferred input off useUploadThing
 type Input = Parameters<typeof useUploadThing>;
@@ -99,13 +100,12 @@ export function Uploader() {
 
   return (
     <>
-      <Button variant={"outline"} asChild>
+      <Button variant={"outline"} size={"icon"}>
         <label
           htmlFor="upload-button"
-          className="flex h-full w-full items-center justify-center gap-2 cursor-pointer"
+          className="flex h-full w-full cursor-pointer items-center justify-center gap-2"
         >
-          <UploadSVG />
-          <p>Upload</p>
+          <PlusIcon />
         </label>
       </Button>
       <input
