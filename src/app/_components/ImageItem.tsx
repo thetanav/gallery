@@ -6,23 +6,25 @@ export default function ImageItem({ image }: { image: any }) {
   return (
     <Link
       href={"/bkt/" + image.id}
-      className="group flex max-w-64 select-none flex-col items-center justify-center"
+      className="group flex select-none flex-col items-center justify-center"
       draggable="false"
       key={image.id}
     >
-      <div className="relative">
+      <div>
         <img
           src={image.url}
           alt={image.name}
-          className="contain h-36 max-w-48 rounded-md border object-cover"
+          className="max-h-48 max-w-56 rounded-md border"
           draggable="false"
         />
-        <HeartIcon className="absolute right-2 top-2 h-5 w-5 text-white opacity-75 transition-opacity group-hover:opacity-100" />
       </div>
-      <div className="mt-1 flex w-full items-center justify-center">
-        <p className="truncate rounded-lg px-2 py-0 text-sm font-semibold text-white group-hover:bg-accent">
+      <div className="mt-2 flex w-full items-center justify-center gap-3 px-4">
+        <p className="max-w-36 truncate rounded-lg px-2 py-0 text-xs text-white group-hover:bg-accent">
           {image.name}
         </p>
+        {image.like && (
+          <HeartIcon className="h-4 w-4 fill-rose-600 text-rose-600 transition-opacity" />
+        )}
       </div>
     </Link>
   );

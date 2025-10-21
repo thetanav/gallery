@@ -18,7 +18,9 @@ export async function UserNav() {
     <DropdownMenu>
       <DropdownMenuTrigger className="cursor-pointer" asChild>
         <Avatar>
-          <AvatarImage src={session?.user.image!} />
+          <AvatarImage
+            src={"https://avatar.vercel.sh/" + session?.user.name!}
+          />
           <AvatarFallback>{session?.user.name?.[0]}</AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>

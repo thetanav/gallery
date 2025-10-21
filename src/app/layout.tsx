@@ -25,7 +25,6 @@ export default function RootLayout({
     <html lang="en" className={`${inter.className} dark`}>
       <body className="min-h-screen w-full">
         <NextTopLoader showSpinner={false} color="#fff" />
-        <Navbar />
         {children}
         {modal}
         <Toaster />

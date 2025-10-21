@@ -100,13 +100,12 @@ export function Uploader() {
 
   return (
     <>
-      <Button variant={"default"} size={"icon"}>
-        <label
-          htmlFor="upload-button"
-          className="flex h-full w-full cursor-pointer items-center justify-center gap-2"
-        >
-          <PlusIcon />
-        </label>
+      <Button
+        variant={"default"}
+        className="rounded-xl bg-gradient-to-bl from-indigo-500 to-purple-600 font-bold text-white hover:ring-2"
+      >
+        <PlusIcon />
+        Upload
       </Button>
       <input
         id="upload-button"
