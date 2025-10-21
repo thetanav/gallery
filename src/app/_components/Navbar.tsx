@@ -16,13 +16,8 @@ export default async function Navbar() {
 
   return (
     <nav className="sticky top-0 z-50 w-full border-b bg-background/95 px-8 backdrop-blur-lg supports-[backdrop-filter]:bg-background/70">
-      <div className="flex h-14 items-center">
-        <div className="flex">
-          <Link href="/" className="flex items-center space-x-2">
-            <span className="text-xl font-bold">gallery</span>
-          </Link>
-        </div>
-        <div className="w-full px-36">
+      <div className="flex h-14 items-center gap-3">
+        <div className="w-full">
           <SearchBox />
         </div>
         <div className="flex flex-1 items-center justify-end gap-3">

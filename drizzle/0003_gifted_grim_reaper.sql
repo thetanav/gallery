@@ -1,0 +1,1 @@
+ALTER TABLE "gallery_image" ADD COLUMN "public" boolean DEFAULT false NOT NULL;

@@ -26,7 +26,9 @@ export const images = createTable(
     id: serial("id").primaryKey(),
     name: varchar("name", { length: 256 }).notNull(),
     url: varchar("url", { length: 1024 }).notNull(),
+    // in future add more metadata to images table
     size: integer("size").notNull(), // bytes
+    public: boolean("public").default(false).notNull(),
 
     userId: varchar("userId", { length: 256 }).notNull(),
     like: boolean("like").default(false),
