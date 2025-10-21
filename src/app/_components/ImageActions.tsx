@@ -52,7 +52,7 @@ export default function ImageAction({
           <X className="h-5 w-5" />
         </button>
         <h1 className="line-clamp-2">{image?.name}</h1>
-        <p>{image?.size} bytes</p>
+        <p>{Math.trunc(image?.size / 10280) / 100} MB</p>
         <div className="flex items-center">
           <Avatar className="mr-3 h-10 w-10">
             <AvatarImage src={user?.image!} alt={user?.name!} />

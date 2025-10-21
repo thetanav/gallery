@@ -18,9 +18,7 @@ export async function UserNav() {
     <DropdownMenu>
       <DropdownMenuTrigger className="cursor-pointer" asChild>
         <Avatar>
-          <AvatarImage
-            src={"https://avatar.vercel.sh/" + session?.user.name!}
-          />
+          <AvatarImage src={session?.user?.image!} />
           <AvatarFallback>{session?.user.name?.[0]}</AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
@@ -37,13 +35,6 @@ export async function UserNav() {
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
-          <DropdownMenuItem>
-            Profile
-            <DropdownMenuShortcut>soon</DropdownMenuShortcut>
-          </DropdownMenuItem>
-          <DropdownMenuItem asChild>
-            <Link href="/me">My Images</Link>
-          </DropdownMenuItem>
           <DropdownMenuItem>
             Settings
             <DropdownMenuShortcut>soon</DropdownMenuShortcut>
