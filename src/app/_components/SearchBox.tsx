@@ -23,7 +23,7 @@ export default function SearchBox() {
     <div className="flex w-full items-center justify-center">
       <Input
         type="text"
-        className="w-full rounded-xl border px-4 py-3 shadow-lg outline-none transition-colors"
+        className="transistion w-full rounded-xl border px-4 py-3 transition-colors focus:ring-2"
         placeholder="Search from..."
         onChange={(e) => handleChange(e.target.value)}
         defaultValue={searchParams.get("query")?.toString()}

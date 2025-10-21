@@ -100,7 +100,7 @@ export function Uploader() {
 
   return (
     <>
-      <Button variant={"outline"} size={"icon"}>
+      <Button variant={"default"} size={"icon"}>
         <label
           htmlFor="upload-button"
           className="flex h-full w-full cursor-pointer items-center justify-center gap-2"

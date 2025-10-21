@@ -5,7 +5,6 @@ import { Inter } from "next/font/google";
 const inter = Inter({ subsets: ["latin"] });
 import { type Metadata } from "next";
 import Navbar from "./_components/Navbar";
-import Footer from "./_components/Footer";
 import { Toaster } from "sonner";
 import NextTopLoader from "nextjs-toploader";
 
@@ -30,7 +29,6 @@ export default function RootLayout({
         {children}
         {modal}
         <Toaster />
-        <Footer />
       </body>
     </html>
   );

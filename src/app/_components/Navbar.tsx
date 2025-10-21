@@ -9,6 +9,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "~/components/ui/tooltip";
+import SearchBox from "./SearchBox";
 
 export default async function Navbar() {
   const session = await auth();
@@ -20,6 +21,9 @@ export default async function Navbar() {
           <Link href="/" className="mr-8 flex items-center space-x-2">
             <span className="text-xl font-bold">gallery</span>
           </Link>
+        </div>
+        <div className="w-full px-8">
+          <SearchBox />
         </div>
         <div className="flex flex-1 items-center justify-end gap-3">
           {session ? (

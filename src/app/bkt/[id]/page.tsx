@@ -7,6 +7,7 @@ import { db } from "~/server/db";
 import { images } from "~/server/db/schema";
 import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
 import BackButton from "~/app/_components/BackButton";
+import Image from "next/image";
 
 export default async function Page(props: { params: Promise<{ id: string }> }) {
   const params = await props.params;
@@ -56,13 +57,12 @@ export default async function Page(props: { params: Promise<{ id: string }> }) {
                 "use server";
                 await db
                   .update(images)
-                  .set({ clap: image?.clap! + 1 })
+                  .set({ like: !image?.like })
                   .where(eq(images.id, image?.id!));
               }}
             >
               <Button variant={"ghost"} className="rounded-full">
                 <HeartIcon className="h-5 w-5 fill-rose-500 stroke-none text-rose-500" />
-                <span className="text-sm font-medium">{image?.clap || 0}</span>
               </Button>
             </form>
             {session?.user.id == image?.userId && (
