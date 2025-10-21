@@ -36,14 +36,30 @@ export const ourFileRouter = {
       console.log("Upload complete for userId:", metadata.userId);
 
       console.log("file url", file.url);
+      // Try to capture the file size from the uploadthing `file` object. Different
+      // versions/transformations may expose this under different keys, so fall back
+      // to 0 if not present to satisfy the NOT NULL DB constraint.
+      const size =
+        (file as any).size ??
+        (file as any).bytes ??
+        (file as any).fileSize ??
+        0;
 
-      await db.insert(images).values({ 
-        name: file.name,
-        userId: metadata.userId,
-        url: file.url
-      });
-
-      // !!! Whatever is returned here is sent to the clientside `onClientUploadComplete` callback
+      try {
+        await db.insert(images).values({
+          name: file.name,
+          userId: metadata.userId,
+          url: file.url,
+          size,
+        });
+      } catch (err) {
+        console.error("Failed to insert image record into DB:", err);
+        // Surface a meaningful error back through UploadThing so the client can
+        // observe the failure via onUploadError/onClientUploadComplete callbacks.
+        throw new UploadThingError(
+          "Failed to save upload metadata to the database",
+        );
+      }
       return { uploadedBy: metadata.userId };
     }),
 } satisfies FileRouter;

@@ -31,7 +31,7 @@ export default async function Page(props: { params: Promise<{ id: string }> }) {
   return (
     <div className="relative h-screen w-full">
       <BackButton />
-      <div className="flex h-full w-full items-center justify-center overflow-auto p-24">
+      <div className="flex h-full w-full items-center justify-center overflow-auto p-8 sm:p-24">
         <img
           src={image?.url!}
           alt={image?.name!}

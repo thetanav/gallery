@@ -14,7 +14,7 @@ export default function ImageItem({ image }: { image: any }) {
         <img
           src={image.url}
           alt={image.name}
-          className="max-h-48 max-w-56 rounded-md border"
+          className="h-fit w-full rounded-md border sm:max-h-48 sm:max-w-56"
           draggable="false"
         />
       </div>

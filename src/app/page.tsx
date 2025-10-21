@@ -40,7 +40,7 @@ export default async function HomePage(props: { searchParams: any }) {
     <main>
       <Navbar />
       <div className="container mx-auto p-8">
-        <div className="grid gap-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6">
+        <div className="grid gap-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
           {imagesArr.map((image) => (
             <ImageItem key={image.id} image={image} />
           ))}
