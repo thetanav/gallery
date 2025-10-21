@@ -16,17 +16,14 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-  modal,
 }: {
   children: React.ReactNode;
-  modal: React.ReactNode;
 }) {
   return (
     <html lang="en" className={`${inter.className} dark`}>
       <body className="min-h-screen w-full">
         <NextTopLoader showSpinner={false} color="#fff" />
         {children}
-        {modal}
         <Toaster />
       </body>
     </html>
