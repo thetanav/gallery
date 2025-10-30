@@ -10,6 +10,7 @@ import {
   TooltipTrigger,
 } from "~/components/ui/tooltip";
 import SearchBox from "./SearchBox";
+import { UploadDropdown } from "./UploadDropdown";
 
 export default async function Navbar() {
   const session = await auth();
@@ -23,6 +24,7 @@ export default async function Navbar() {
         <div className="flex flex-1 items-center justify-end gap-3">
           {session ? (
             <div className="flex h-fit w-fit items-center justify-center gap-4">
+              <UploadDropdown />
               <UserNav />
               <Uploader />
             </div>

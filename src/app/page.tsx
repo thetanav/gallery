@@ -6,7 +6,6 @@ import { and, desc, eq, ilike } from "drizzle-orm";
 import SearchBox from "./_components/SearchBox";
 import ImageItem from "./_components/ImageItem";
 import { auth } from "~/server/auth";
-import Navbar from "./_components/Navbar";
 import { redirect } from "next/navigation";
 
 export default async function HomePage(props: { searchParams: any }) {
@@ -38,7 +37,6 @@ export default async function HomePage(props: { searchParams: any }) {
 
   return (
     <main>
-      <Navbar />
       <div className="container mx-auto px-2 py-4 sm:px-4 lg:px-6">
         <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 sm:gap-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7">
           {imagesArr.map((image) => (

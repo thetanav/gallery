@@ -7,6 +7,7 @@ import { type Metadata } from "next";
 import Navbar from "./_components/Navbar";
 import { Toaster } from "sonner";
 import NextTopLoader from "nextjs-toploader";
+import { Providers } from "~/components/providers";
 
 export const metadata: Metadata = {
   title: "gallery FYNC",
@@ -23,7 +24,10 @@ export default function RootLayout({
     <html lang="en" className={`${inter.className} dark`}>
       <body className="min-h-screen w-full">
         <NextTopLoader showSpinner={false} color="#fff" />
-        {children}
+        <Providers>
+          <Navbar />
+          {children}
+        </Providers>
         <Toaster />
       </body>
     </html>

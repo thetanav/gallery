@@ -5,20 +5,33 @@ import { useUploadThing } from "~/utils/uploadthing";
 import { toast } from "sonner";
 import { Button } from "~/components/ui/button";
 import { PlusIcon } from "lucide-react";
+import { useUpload } from "~/lib/upload-context";
 
 // inferred input off useUploadThing
 type Input = Parameters<typeof useUploadThing>;
 
 const useUploadThingInputProps = (...args: Input) => {
   const $ut = useUploadThing(...args);
+  const { addUpload, completeUpload, errorUpload } = useUpload();
 
   const onChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files) return;
 
     const selectedFiles = Array.from(e.target.files);
+    const uploadIds: string[] = [];
+    selectedFiles.forEach((file) => {
+      const id = addUpload(file);
+      uploadIds.push(id);
+    });
+
     const result = await $ut.startUpload(selectedFiles);
 
     console.log("uploaded files", result);
+    // Note: UploadThing doesn't provide per-file callbacks easily,
+    // so we'll mark all as completed if successful
+    if (result) {
+      uploadIds.forEach((id) => completeUpload(id));
+    }
   };
 
   return {
@@ -74,6 +87,7 @@ function LoadingSpinnerSVG() {
 
 export function Uploader() {
   const router = useRouter();
+  const { completeAllUploading, errorAllUploading } = useUpload();
 
   const { inputProps } = useUploadThingInputProps("imageUploader", {
     onUploadBegin() {
@@ -90,10 +104,12 @@ export function Uploader() {
     onUploadError(error) {
       toast.dismiss("upload-begin");
       toast.error("Upload failed");
+      errorAllUploading();
     },
     onClientUploadComplete() {
       toast.dismiss("upload-begin");
       toast("Upload complete!");
+      completeAllUploading();
 
       router.refresh();
     },

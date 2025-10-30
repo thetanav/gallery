@@ -1,14 +1,7 @@
-import { and, eq } from "drizzle-orm";
-import { GlobeIcon, HeartIcon, LockKeyholeIcon, TrashIcon } from "lucide-react";
-import { notFound, redirect } from "next/navigation";
-import { Button } from "~/components/ui/button";
+import { notFound } from "next/navigation";
 import { auth } from "~/server/auth";
 import { db } from "~/server/db";
-import { images } from "~/server/db/schema";
-import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
 import BackButton from "~/app/_components/BackButton";
-import { toast } from "sonner";
-import { revalidatePath } from "next/cache";
 import ImageActions from "~/app/_components/ImageActions";
 
 export default async function Page(props: { params: Promise<{ id: string }> }) {
