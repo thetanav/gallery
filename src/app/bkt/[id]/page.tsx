@@ -1,7 +1,6 @@
 import { notFound } from "next/navigation";
 import { auth } from "~/server/auth";
 import { db } from "~/server/db";
-import BackButton from "~/app/_components/BackButton";
 import ImageActions from "~/app/_components/ImageActions";
 
 export default async function Page(props: { params: Promise<{ id: string }> }) {
@@ -23,8 +22,7 @@ export default async function Page(props: { params: Promise<{ id: string }> }) {
 
   return (
     <div className="relative h-screen w-full">
-      <BackButton />
-      <div className="flex h-full w-full items-center justify-center overflow-auto p-8 sm:p-24">
+      <div className="flex w-full items-center justify-center overflow-auto p-4 sm:p-24">
         <img
           src={image?.url!}
           alt={image?.name!}

@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { useSession, signOut } from "next-auth/react";
 import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
 import {
   DropdownMenu,
@@ -10,10 +13,9 @@ import {
   DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from "~/components/ui/dropdown-menu";
-import { auth, signOut } from "~/server/auth";
 
-export async function UserNav() {
-  const session = await auth();
+export function UserNav() {
+  const { data: session } = useSession();
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className="cursor-pointer" asChild>
@@ -41,18 +43,9 @@ export async function UserNav() {
           </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
-        <form
-          action={async () => {
-            "use server";
-            await signOut();
-          }}
-        >
-          <button type="submit" className="w-full">
-            <DropdownMenuItem className="cursor-pointer">
-              Log out
-            </DropdownMenuItem>
-          </button>
-        </form>
+        <DropdownMenuItem onClick={() => signOut()} className="cursor-pointer">
+          Log out
+        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );

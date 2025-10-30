@@ -10,7 +10,7 @@ export default function BackButton() {
   return (
     <Button
       variant="outline"
-      className="absolute left-4 top-4"
+      className="absolute left-4 top-4 rounded-full bg-accent px-4 py-3"
       onClick={() => router.back()}
     >
       <ArrowLeftIcon className="h-5 w-5" />
