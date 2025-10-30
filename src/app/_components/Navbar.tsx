@@ -15,6 +15,7 @@ import {
 } from "~/components/ui/tooltip";
 import SearchBox from "./SearchBox";
 import { UploadDropdown } from "./UploadDropdown";
+import { Suspense } from "react";
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -36,7 +37,9 @@ export default function Navbar() {
               <span>back</span>
             </Button>
           ) : (
-            <SearchBox />
+            <Suspense fallback={<div>Loading...</div>}>
+              <SearchBox />
+            </Suspense>
           )}
         </div>
         <div className="flex flex-1 items-center justify-end gap-3">
